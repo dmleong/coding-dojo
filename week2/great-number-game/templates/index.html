@@ -1,15 +1,39 @@
 <!doctype html>
 <html>
 <head>
-    <title>Great Number Game</title>
+	<title>Great Number Game</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to the Great Number Game</h1>
-    <p>I am thinking of a number between 1 and 100</p>
-    <p>Take a guess</p>
-     <form action='/guess' method='post'>
-        <input type="text" name="guess"/><br/>
-        <input type="submit" name="submit">
-    </form>
+	<h1>Welcome to the Great Number Game</h1>
+	<p>I am thinking of a number between 1 and 100</p>
+	<p>Take a guess</p>
+	<form action='/guess' method='post'>
+		<input type="text" name="guess"/><br/>
+		<input type="submit" name="submit">
+	</form>
+	{% with errors = get_flashed_messages(category_filter=["error"]) %}
+	{% if errors %}
+	<div class="alert-message block-message error">
+		{%- for msg in errors %}
+		<p>{{ msg }}</p>
+		{% endfor -%}
+	</div>
+	{% endif %}
+	{% endwith %}
+
+	{% with successes = get_flashed_messages(category_filter=["success"]) %}
+	{% if successes %}
+	<div class="alert-message block-message success">
+		{%- for msg in successes %}
+		<p>{{ msg }}</p>
+		{% endfor -%}
+		<form action='/reset' method='post'>
+			<input type='submit' name='reset' value='Reset'>
+		</form>
+	</div>
+	{% endif %}
+	{% endwith %}
+
 </body>
 </html>

@@ -1,0 +1,34 @@
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+}
+
+.error {
+    background: red;
+    box-sizing: border-box;
+    padding: 50px;
+    width:300px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.success {
+    background: green;
+    box-sizing: border-box;
+    padding: 50px;
+    width:300px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+

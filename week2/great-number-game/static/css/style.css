@@ -1,0 +1,28 @@
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+.flashes {
+    box-sizing: border-box;
+    padding: 50px;
+    width:300px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.error {
+    background: red;
+}
+
+.success {
+    background: green;
+}
+

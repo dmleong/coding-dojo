@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>Great Number Game</title>
+</head>
+<body>
+    <h1>Welcome to the Great Number Game</h1>
+    <p>I am thinking of a number between 1 and 100</p>
+    <p>Take a guess</p>
+    <form action='/guess' method='post'>
+        <input type="text" name="guess"/><br/>
+        <input type="submit" name="submit">
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
