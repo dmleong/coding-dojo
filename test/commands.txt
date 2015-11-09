@@ -1,0 +1,10 @@
+
+cd ~/Projects 
+mkdir test 
+touch index.html
+touch styles.css
+git commit -am "updated html"
+git commit -am "updated css!""
+git log
+git reset --hard 0d1d7fc32
+git commit -am "more updated css!"

@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Form test index</title>
+    </head>
+    <body>
+        <h1>Survey</h1>
+            <form action='/create' method='post'>
+                Your Name: <input type='text' name='name'/><br/>
+                Dojo location:
+                    <select name='location'>
+                        {% for i in option_list %}
+                            <option name="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select> <br/>
+                Favorite Language:
+                    <select name='language'>
+                        {% for j in language_list %}
+                            <option name="{{ j }}">{{ j }}</option>
+                        {% endfor %}
+                    </select> <br/>
+                Comment: <textarea rows="4" cols="50" name='comment'></textarea> <br/>
+                <input type='submit' value='Submit'>
+            </form>
+    </body>
+</html>

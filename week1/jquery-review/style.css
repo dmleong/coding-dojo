@@ -1,0 +1,52 @@
+body {
+    background-color: black;
+    background-image: none;
+    background-repeat: none;
+}
+
+#wrapper {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#select-arena {
+    width: 300px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .4);
+    border-radius: 8px;
+    padding: 20px 50px 40px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 25%;
+}
+
+#select-arena h1 {
+	font-size: 30px;
+	color: #F9AE4E;
+	text-shadow: 2px 2px 4px #000000;
+}
+
+#select-players {
+	display: none;
+}
+
+.beach {
+	background-image: url('/');
+}
+
+.ninja {
+	width: 200px;
+	height: 300px;
+	display: inline-block;
+	margin-top: -50px;
+}
+
+#player1 {
+	display: none;
+	float: left;
+}
+
+#player2 {
+	display: none;
+	float: right;
+}

@@ -1,0 +1,19 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Flask variables</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src='{{ url_for('static', filename='js/script.js') }}'></script>
+</head>
+<body>
+    <h1>My first flash template </h1>
+    <p>Phrase: {{phrase}}</p>
+    <p>Time: {{times}}</p>
+
+    {% for x in range(0, times): %}
+        <p>{{phrase}}</p>
+    {%  endfor %}
+
+    <img src='{{ url_for('static', filename='img/stevephone.jpg') }}'>
+</body>
+</html>

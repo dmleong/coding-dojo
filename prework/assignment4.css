@@ -1,0 +1,99 @@
+/*CSS reset settings here*/
+html {
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	box-sizing: border-box;
+  	font-size: 16px;
+  	line-height: 1.4;
+}
+*, *:before, *:after {
+  	-webkit-box-sizing: inherit;
+  	-moz-box-sizing: inherit;
+  	box-sizing: inherit;
+ 	margin: 0px;
+	padding: 0px;
+  }
+
+a:visited {
+	color: #972026;
+}
+div {
+	background-color: gray;
+	border-radius: 30px;
+	background-color: #DDDDDD;
+}
+
+#wrapper{
+	 width: 970px;
+	 background-color: #EEEEEE;
+	 margin: 0px auto;
+	 padding: 10px 10px 30px 10px;
+	 border-radius: 0;
+}
+
+#header {
+	padding: 20px;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+#navigation {
+	display: inline-block;
+	width: 240px;
+	padding: 20px 0 20px 30px;
+	margin: 20px 20px 0 0;
+	vertical-align: top;
+}
+
+#navigation li {
+	list-style-type: disc; 
+}
+
+#navigation li.sub {
+	list-style-type: circle;
+	margin-left: 17px;
+}
+
+#navigation a {
+	text-decoration: none;
+}
+
+#main {
+	background-color: #AAAAAA;
+	display: inline-block;
+	width: 685px;
+	margin: 20px 0 30px;
+	padding: 30px 25px;
+}
+
+#main p {
+	line-height: 1.4;
+	margin: 16px 0;
+} 
+
+#main ul {
+	margin-left: 35px;
+}
+
+#main li {
+	line-height: 1.4; 
+	margin-bottom: 15px;
+}
+
+.strong {
+	font-weight: 900;
+}
+
+#footer {
+	padding: 20px;	
+}
+
+#footer p {
+	font-size: .95em;
+}
