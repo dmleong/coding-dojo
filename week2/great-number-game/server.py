@@ -9,10 +9,11 @@ def setSession():
 
 @app.route('/')
 def index():
-    if session['num'] != None:
-        pass
-    else:
+    if session['num'] == None:
         setSession()
+    else:
+        pass
+    print session['num']
     return render_template('index.html')
 
 @app.route('/guess', methods=['POST'])
