@@ -1,0 +1,58 @@
+h3 {
+    display: inline-block;
+}
+
+.reset {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.row {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+.place {
+    box-sizing: border-box;
+    width: 23%;
+    height: 250px;
+    margin-right: 2%;
+    display: inline-block;
+    border: 1px solid blue;
+    text-align: center;
+    padding: 40px;
+}
+
+.place:last-child {
+    margin-right: 0;
+}
+
+.activities {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+li {
+    list-style: none;
+}
+
+.lost {
+    color: red;
+}
+
+.earn {
+    color: green;
+}

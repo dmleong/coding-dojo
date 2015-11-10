@@ -13,7 +13,6 @@ def index():
         pass
     else:
         setSession()
-    print session['num']
     return render_template('index.html')
 
 @app.route('/guess', methods=['POST'])
