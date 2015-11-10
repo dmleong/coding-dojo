@@ -1,0 +1,47 @@
+.container {
+    border: 2px solid black;
+    width: 960px;
+    padding: 25px 50px 50px 50px;
+    box-sizing: content-box;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.row {
+    width: 100%;
+    display: relative;
+}
+
+.half {
+    width: 48%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    display: relative;
+}
+
+.half:first-child {
+    margin-right: 1%;
+}
+
+form {
+    margin-top: 25px;
+}
+
+label {
+    vertical-align: top
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+select {
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -17px;
+}

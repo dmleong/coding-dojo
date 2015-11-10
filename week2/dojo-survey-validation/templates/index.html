@@ -1,0 +1,49 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Dojo Survey Index</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Survey</h1>
+        <form action='/create' method='post'>
+            {% with errors = get_flashed_messages(category_filter=["nameError"]) %}
+            {% if errors %}
+            <div class="error">
+                {%- for msg in errors %}
+                <p>{{ msg }}</p>
+                {% endfor -%}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <label for='name'>Your Name:</label>
+            <input type='text' name='name'/><br/>
+            <label for='location'>Dojo location:</label>
+            <select name='location'>
+                {% for i in option_list %}
+                <option name="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select> <br/>
+            <label for='language'>Favorite Language:</label>
+            <select name='language'>
+                {% for j in language_list %}
+                <option name="{{ j }}">{{ j }}</option>
+                {% endfor %}
+            </select> <br/>
+            {% with errors = get_flashed_messages(category_filter=["commentError"]) %}
+            {% if errors %}
+            <div class="error">
+                {%- for msg in errors %}
+                <p>{{ msg }}</p>
+                {% endfor -%}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <label for='comment'>Comment:</label>
+            <textarea rows="4" cols="50" name='comment'></textarea> <br/>
+            <input type='submit' value='Submit'>
+        </form>
+    </div>
+</body>
+</html>

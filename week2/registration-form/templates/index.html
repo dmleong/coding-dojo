@@ -1,0 +1,35 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Dojo Survey Index</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Survey</h1>
+        <form action='/create' method='post'>
+            {% with errors = get_flashed_messages(category_filter=["nameError"]) %}
+            {% if errors %}
+            <div class="error">
+                {%- for msg in errors %}
+                <p>{{ msg }}</p>
+                {% endfor -%}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <label for='firstName'>First Name:</label>
+                <input type='text' name='firstName'/><br/>
+            <label for='lastName'>Last Name:</label>
+                <input type='text' name='lastName'/><br/>
+            <label for='email'>Email:</label>
+                <input type='email' name='email'/><br/>
+            <label for='password'>Password:</label>
+                <input type='password' name='password'/>
+            <label for='confirmPassword'>Confirm Password:</label>
+                <input type='text' name='confirmPassword'/>
+
+            <input type='submit' value='Submit'>
+        </form>
+    </div>
+</body>
+</html>

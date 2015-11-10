@@ -1,0 +1,52 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Results of survey</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Submitted info:</h1>
+        <div class="row">
+            <div class="half">
+                <p>Name:</p>
+            </div>
+            <div class="half">
+                <p>{{session['name']}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="half">
+                <p>Location:</p>
+            </div>
+            <div class="half">
+                <p>{{session['location']}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="half">
+                <p>Favorite language:</p>
+            </div>
+            <div class="half">
+                <p>{{session['language']}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="half">
+                <p>Comment:</p>
+            </div>
+            <div class="half">
+                <p>{{session['comment']}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="half"></div>
+            <div class="half">
+                 <form action='/'>
+                    <button>Go back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
