@@ -1,34 +1,47 @@
 <!Doctype html>
 <html>
 <head>
-    <title>Dojo Survey Index</title>
+    <title>Registration form</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Survey</h1>
+        <h1>Registration</h1>
         <form action='/create' method='post'>
-            {% with errors = get_flashed_messages(category_filter=["nameError"]) %}
-            {% if errors %}
-            <div class="error">
-                {%- for msg in errors %}
-                <p>{{ msg }}</p>
-                {% endfor -%}
-            </div>
-            {% endif %}
+            {% with errors = get_flashed_messages(category_filter=["firstNameError"]) %}
+                {% include "partial.html" %}
             {% endwith %}
             <label for='firstName'>First Name:</label>
-                <input type='text' name='firstName'/><br/>
+            <input type='text' name='firstName' value={{session['firstName']}} ><br/>
+            {% with errors = get_flashed_messages(category_filter=["lastNameError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
             <label for='lastName'>Last Name:</label>
-                <input type='text' name='lastName'/><br/>
+            <input type='text' name='lastName' value="{{session['lastName']}}" ><br/>
+            {% with errors = get_flashed_messages(category_filter=["dateError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='birthdate'>Date of Birth:</label><br/>
+            <input type="date" name='birthdate'/><br/>
+            {% with errors = get_flashed_messages(category_filter=["emailError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
             <label for='email'>Email:</label>
-                <input type='email' name='email'/><br/>
+            <input type='text' name='email' value={{session['email']}} ><br/>
+            {% with errors = get_flashed_messages(category_filter=["passwordError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
             <label for='password'>Password:</label>
-                <input type='password' name='password'/>
+            <input type='password' name='password'/><br/>
+            {% with errors = get_flashed_messages(category_filter=["confirmPasswordError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
             <label for='confirmPassword'>Confirm Password:</label>
-                <input type='text' name='confirmPassword'/>
-
+            <input type='password' name='confirmPassword'/><br/>
             <input type='submit' value='Submit'>
+        </form>
+        <form class="inline" action="/clear" method="POST">
+                <input type='submit' value='Clear form'>
         </form>
     </div>
 </body>

@@ -6,43 +6,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Submitted info:</h1>
+        <h1>Welcome, {{session['firstName']}} {{session['lastName']}}</h1>
         <div class="row">
             <div class="half">
-                <p>Name:</p>
-            </div>
-            <div class="half">
-                <p>{{session['name']}}</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
             </div>
         </div>
-        <div class="row">
+       <div class="row">
             <div class="half">
-                <p>Location:</p>
-            </div>
-            <div class="half">
-                <p>{{session['location']}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="half">
-                <p>Favorite language:</p>
-            </div>
-            <div class="half">
-                <p>{{session['language']}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="half">
-                <p>Comment:</p>
-            </div>
-            <div class="half">
-                <p>{{session['comment']}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="half"></div>
-            <div class="half">
-                 <form action='/'>
+                 <form action='/clear' method='POST'>
                     <button>Go back</button>
                 </form>
             </div>

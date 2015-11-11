@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Email validation with db</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class='container valid'>
+        <p>The email address you entered {{email}} is a VALID email address! Thank you!</p>
+    </div>
+    <div class='container'>
+        <h1>Email Addresses Entered: </h1>
+        {% if list %}
+        <table>
+            {% for email in list %}
+            <tr>
+                <td>{{email['email_addresses']}}</td>
+                <td>{{email['created_at'].strftime('%Y/%m/%d %I:%M %p')}}</td>
+                <td class='remove'>
+                    <form action='/delete' method='POST'>
+                        <input type='hidden' name='hidden' value={{email['idemails']}} />
+                        <input type='submit' value='Delete'>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>

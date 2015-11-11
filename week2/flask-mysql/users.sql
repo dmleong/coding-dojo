@@ -1,0 +1,1 @@
+mydbSELECT * FROM new_schema.mydb;
