@@ -1,0 +1,38 @@
+.container {
+    width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 5px solid black;
+    padding: 30px 50px 50px 50px;
+    margin-top: 50px;
+}
+
+.valid {
+    background: green;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.error {
+    font-size: 14px;
+    color: red;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+.remove {
+    text-align: right;
+}
+
+input {
+    margin-bottom: 20px;
+}

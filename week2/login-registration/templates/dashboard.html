@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome {{session['first_name']}}! </h1>
+        <form class="inline" action="/logout" method="POST">
+                <input type='submit' value='Logout'>
+        </form>
+    </div>
+</body>
+</html>

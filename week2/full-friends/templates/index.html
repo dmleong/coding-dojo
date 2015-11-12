@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>Full Friends List</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class='container'>
+        <h1>Add New Friend</h1>
+        <form action='/friends' method='POST'>
+            {% with errors = get_flashed_messages(category_filter=["firstNameError"]) %}
+                {% if errors %}
+                <div class="error">
+                    {%- for msg in errors %}
+                    <p>{{ msg }}</p>
+                    {% endfor -%}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <label for='first_name'>First Name: <input type='text', name='first_name'/></label>
+            {% with errors = get_flashed_messages(category_filter=["lastNameError"]) %}
+                {% if errors %}
+                <div class="error">
+                    {%- for msg in errors %}
+                    <p>{{ msg }}</p>
+                    {% endfor -%}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <label for='last_name'>Last Name: <input type='text', name='last_name'/></label><br/>
+            {% with errors = get_flashed_messages(category_filter=["occupationError"]) %}
+                {% if errors %}
+                <div class="error">
+                    {%- for msg in errors %}
+                    <p>{{ msg }}</p>
+                    {% endfor -%}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <label for='occupation'>Occupation: <input type='text', name='occupation'/></label><br/>
+            <input type='submit' name='Submit'/>
+        </form>
+    </div>
+    {% if list %}
+        <div class='container'>
+            <h3>Current friend list</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Occupation</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                {% for friend in list %}
+                <tr>
+                    <td>{{friend['first_name']}} {{friend['last_name']}}</td>
+                    <td>{{friend['occupation']}}</td>
+                    <td>
+                        <a href="/friends/{{friend['idfullfriends']}}/edit"><input type='submit' name='edit' value='Edit'></a>
+                    </td>
+                    <td>
+                        <form action="/friends/{{friend['idfullfriends']}}/delete" method="POST">
+                            <input type='submit' name='delete' value='Delete'>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

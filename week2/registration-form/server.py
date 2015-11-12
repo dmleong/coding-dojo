@@ -8,13 +8,6 @@ passwordRegex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
 app = Flask(__name__)
 app.secret_key = 'ThisIsSecret'
 
-# def compareDate(date):
-#     dt = [int(x) for x in request.form['birthdate'].split("-")]
-#     birthYear = dt[0]
-#     birthMonth = dt[1]
-#     birthDay = dt[2]
-#     return birthYear, birthMonth, birthDay
-
 
 def validate():
     errors = 0

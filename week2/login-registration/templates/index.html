@@ -1,0 +1,40 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Registration form</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration</h1>
+        <form action='/create' method='post'>
+            {% with errors = get_flashed_messages(category_filter=["firstNameError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='firstName'>First Name:</label>
+            <input type='text' name='firstName' value={{session['firstName']}} ><br/>
+            {% with errors = get_flashed_messages(category_filter=["lastNameError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='lastName'>Last Name:</label>
+            <input type='text' name='lastName' value="{{session['lastName']}}" ><br/>
+            {% with errors = get_flashed_messages(category_filter=["emailError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='email'>Email:</label>
+            <input type='text' name='email' value={{session['email']}} ><br/>
+            {% with errors = get_flashed_messages(category_filter=["passwordError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='password'>Password:</label>
+            <input type='password' name='password'/><br/>
+            {% with errors = get_flashed_messages(category_filter=["confirmPasswordError"]) %}
+                {% include "partial.html" %}
+            {% endwith %}
+            <label for='confirmPassword'>Confirm Password:</label>
+            <input type='password' name='confirmPassword'/><br/>
+            <input type='submit' value='Submit'>
+        </form>
+    </div>
+</body>
+</html>

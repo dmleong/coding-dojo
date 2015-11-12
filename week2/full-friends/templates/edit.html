@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Edit friends</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class='container'>
+        {% if friend %}
+            {% for f in friend %}
+            <h3>Edit {{f['first_name']}} {{f['last_name']}}'s information</h3>
+            <form action=/friends/{{f['idfullfriends']}} method='post'>
+                <table>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Occupation</td>
+                    </tr>
+                    <tr>
+                        <td><input type='text' name='first_name' value="{{f['first_name']}}" ></td>
+                        <td><input type='text' name='last_name' value="{{f['last_name']}}" ></td>
+                        <td><input type='text' name='occupation' value="{{f['occupation']}}" ></td>
+                        <td class='edit'><input type='submit' value='Submit'></td>
+                    </tr>
+                </table>
+            </form>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
