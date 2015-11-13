@@ -1,0 +1,68 @@
+{% include 'head.html' %}
+<body>
+    {% include 'nav.html' %}
+    <div class='container-fluid'>
+        <div class='col-md-5'>
+            <form action='/validate' method='post' class='form-signin'>
+                <h2 class='form-signin-heading'>Login</h2>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['loginEmailError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='email'>Email:</label>
+                    <input type='text' name='email' class='form-control' value={{session['email']}} >
+                </div>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['loginPasswordError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='password' >Password:</label>
+                    <input type='password' class='form-control' name='password'/>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </form>
+        </div>
+        <div class='col-md-5'>
+            <form action='/create' method='post' class='form-signin'>
+                <h2 class='form-signin-heading'>Registration</h2>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['first_nameError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='first_name' >First Name:</label>
+                    <input type='text' name='first_name' class='form-control' value={{session['first_name']}} >
+                </div>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['last_NameError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='last_name'  >Last Name:</label>
+                    <input type='text' name='last_name' class='form-control' value='{{session['last_name']}}' >
+                </div>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['emailError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='email'>Email:</label>
+                    <input type='text' name='email' class='form-control' value={{session['email']}} >
+                </div>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['passwordError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='password' >Password:</label>
+                    <input type='password' class='form-control' name='password'/>
+                </div>
+                <div class='form-group'>
+                    {% with errors = get_flashed_messages(category_filter=['confirm_passwordError']) %}
+                        {% include 'partial.html' %}
+                    {% endwith %}
+                    <label for='confirm_password' >Confirm Password:</label>
+                    <input type='password' name='confirm_password' class='form-control' />
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+
+{% include 'footer.html'%}
