@@ -16,7 +16,7 @@
                     {% with errors = get_flashed_messages(category_filter=['loginPasswordError']) %}
                         {% include 'partial.html' %}
                     {% endwith %}
-                    <label for='password' >Password:</label>
+                    <label for='password'>Password:</label>
                     <input type='password' class='form-control' name='password'/>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>

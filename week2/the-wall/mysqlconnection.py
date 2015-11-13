@@ -41,7 +41,7 @@ class MySQLConnection(object):
     returns the number of rows affected
     """
     # Begin run_mysql_query
-    def run_mysql_query(self, query):
+    def run_mysql_query(self, query, ):
         cursor = self.conn.cursor(dictionary=True)
         data = cursor.execute(query)
         self.conn.commit()

@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
-import re
-from flask.ext.bcrypt import Bcrypt
 from mysqlconnection import MySQLConnector
+from flask.ext.bcrypt import Bcrypt
+import re
+import pprint
 
 app = Flask(__name__)
-app.secret_key = 'ThisIsSecret'
-mysql = MySQLConnector('loginregistration')
 bcrypt = Bcrypt(app)
+mysql = MySQLConnector('loginregistration')
+app.secret_key = 'ThisIsSecret'
 
 emailRegex = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 passwordRegex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
@@ -129,11 +130,47 @@ def checkIfEmailExists():
     else:
         return True
 
-def getPostWithAuthor():
-    postWithAuthor = mysql.fetch("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.idusers ORDER BY posts.created_at DESC")
-    print postWithAuthor
-    return postWithAuthor
+def getPostsWithUsers():
+    getPosts = "SELECT posts.idposts, posts.post_text, posts.created_at, users.idusers, users.idusers, users.first_name, users.last_name FROM posts LEFT JOIN users ON posts.user_id = users.idusers ORDER BY posts.created_at DESC"
+    posts = mysql.fetch(getPosts)
+    return posts
 
+def getComments():
+    getComments = "SELECT comments.post_id, comments.comment_text, comments.created_at, users.first_name, users.last_name FROM comments LEFT JOIN posts ON comments.post_id = posts.idposts LEFT JOIN users ON comments.user_id = users.idusers"
+    comments = mysql.fetch(getComments)
+    return comments
+
+def getPostsWithComments():
+    comments = getComments()
+    posts = getPostsWithUsers()
+    singlePostComments = []
+    postsWithCommentContainer = []
+
+    for post in posts:
+        commentContainer = []
+        postData = {
+            "created_at": post['created_at'].strftime("%B %d, %Y %-I:%M %p" ),
+            "post_id": post['idposts'],
+            "first_name": post['first_name'],
+            "last_name": post['last_name'],
+            "post_text": post['post_text'],
+            "new_id": post['created_at'].strftime("%B%d%Y%-I%M%s" ),
+            "comments": commentContainer,
+            }
+        for comment in comments:
+
+            if post['idposts'] == comment['post_id']:
+                info = {
+                "post_id": comment['post_id'],
+                "created_at": comment['created_at'].strftime("%B %d, %Y %-I:%M %p" ),
+                "first_name": comment['first_name'],
+                "last_name": comment['last_name'],
+                "comment_text": comment['comment_text']
+                }
+                commentContainer.append(info)
+        postsWithCommentContainer.append(postData)
+
+    return postsWithCommentContainer
 
 @app.route('/')
 def index():
@@ -179,11 +216,9 @@ def validateLoginInfo():
         return redirect('/login')
     else:
         userInfo = mysql.fetch("SELECT * FROM users WHERE email = '{}'".format(session['email']))
-        inputPassword = request.form['password']
-        inputPasswordEncrypted = bcrypt.generate_password_hash(request.form['password'])
-
         if userInfo:
-            if inputPasswordEncrypted == userInfo[0]['password']:
+            inputPassword = request.form['password']
+            if bcrypt.check_password_hash(userInfo[0]['password'], inputPassword):
                 session['loggedin'] = True
                 session['userid'] = userInfo[0]['idusers']
                 session['first_name'] = userInfo[0]['first_name']
@@ -199,8 +234,8 @@ def validateLoginInfo():
 def returnDashboard():
     if session['loggedin'] == True:
         setUserId()
-        postList = getPostWithAuthor()
-        return render_template('dashboard.html', posts=postList)
+        postData = getPostsWithComments()
+        return render_template('dashboard.html', posts=postData)
     else:
         return redirect('/')
 
@@ -210,7 +245,19 @@ def postData():
         postMessage = str(request.form['post'])
         query = "INSERT INTO posts (post_text, created_at, updated_at, user_id) VALUES ('{}', NOW(), NOW(), '{}')".format(postMessage, session['userid'])
         mysql.run_mysql_query(query)
-    return redirect('/dashboard')
+        return redirect('/dashboard')
+    else:
+        return redirect('/')
+
+@app.route('/post/<post_id>/comment', methods=['POST'])
+def postComment(post_id):
+    if session['loggedin'] == True:
+        commentMessage = str(request.form['comment'])
+        query = "INSERT INTO comments (post_id, user_id, comment_text, created_at, updated_at) VALUES ('{}', '{}', '{}', NOW(), NOW())".format(post_id, session['userid'], commentMessage)
+        mysql.run_mysql_query(query)
+        return redirect('/dashboard')
+    else:
+        return redirect('/')
 
 @app.route('/logout')
 def clear():
