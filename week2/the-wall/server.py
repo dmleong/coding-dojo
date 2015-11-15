@@ -3,6 +3,7 @@ from mysqlconnection import MySQLConnector
 from flask.ext.bcrypt import Bcrypt
 import re
 import pprint
+from itertools import groupby
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -143,31 +144,34 @@ def getComments():
 def getPostsWithComments():
     comments = getComments()
     posts = getPostsWithUsers()
-    singlePostComments = []
+    commentList = {}
     postsWithCommentContainer = []
 
+    for comment in comments:
+        info = {
+                "post_id": comment['post_id'],
+                "created_at": comment['created_at'].strftime("%B %d, %Y %-I:%M %p" ),
+                "first_name": comment['first_name'],
+                "last_name": comment['last_name'],
+                "comment_text": comment['comment_text']
+            }
+        if comment['post_id'] in commentList:
+            commentList[comment['post_id']].append(info)
+        else:
+            commentList[comment['post_id']] = [info]
+
     for post in posts:
-        commentContainer = []
         postData = {
             "created_at": post['created_at'].strftime("%B %d, %Y %-I:%M %p" ),
             "post_id": post['idposts'],
             "first_name": post['first_name'],
             "last_name": post['last_name'],
             "post_text": post['post_text'],
-            "new_id": post['created_at'].strftime("%B%d%Y%-I%M%s" ),
-            "comments": commentContainer,
-            }
-        for comment in comments:
+            "new_id": post['created_at'].strftime("%B%d%Y%-I%M%s" )
+        }
 
-            if post['idposts'] == comment['post_id']:
-                info = {
-                "post_id": comment['post_id'],
-                "created_at": comment['created_at'].strftime("%B %d, %Y %-I:%M %p" ),
-                "first_name": comment['first_name'],
-                "last_name": comment['last_name'],
-                "comment_text": comment['comment_text']
-                }
-                commentContainer.append(info)
+        if post['idposts'] in commentList:
+            postData['comments'] = commentList[post['idposts']]
         postsWithCommentContainer.append(postData)
 
     return postsWithCommentContainer
