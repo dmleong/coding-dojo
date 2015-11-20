@@ -5,16 +5,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
          $(document).ready(function() {
-             var container = [];
-             var sprites = []
-             var info = []
+            for (var i = 1; i < 5; i++) {
+                $('#pokemon').append("<img id='" + i + "'class='pokemon' src='http://pokeapi.co/media/img/" + i + ".png'/>");
+            }
 
-             for (var i = 1; i <= 151; i++) {
-                 var jqxhr = $.get('http://pokeapi.co/api/v1/pokemon/' + i, function(res) {
-                    var sprite = res['sprites'][0]['resource_uri'];
-                    sprites.push(sprite);
-
+            $('.pokemon').click(function(){
+                var id = this.id
+                $.get('http://pokeapi.co/api/v1/pokemon/' + id, function(res) {
                     var html_str = "";
+                    html_str += "<img id='" + id + "'class='pokemon' src='http://pokeapi.co/media/img/" + id + ".png'/>";
                     html_str += "<h4>Name: " + res['name'] + "</h4>";
                     html_str += "<h4>Height:</h4>";
                     html_str += res['height'];
@@ -27,36 +26,9 @@
                     }
                     html_str += "</ul>";
 
-                    var poke_info = {
-                        "id": res['pkdx_id'],
-                        "html" : html_str
-                    }
-
-                    info.push(poke_info);
-                 }, "json")
-             };
-
-             jqxhr.always(function(){
-                 for (var j = 0; j < sprites.length-1; j++) {
-                    var images = $.get('http://pokeapi.co' + sprites[j], function(response) {
-                        var id = response['id'] - 1;
-                        var image = "<img class='pokemon' id='" + id + "' src='http://pokeapi.co" + response["image"] + "'/>";
-                        container.push(image);
-                     }, "json")
-                 }
-                 images.always(function() {
-                     $('#pokemon').append(container);
-                     $('.pokemon').click(function(){
-                        info[((this.id)-1)]['image'] = this.src;
-                        var pokedeck_html = '';
-                        pokedeck_html += "<img src='" + info[((this.id)-1)]['image'] + "'/>";
-                        pokedeck_html += info[(this.id)-1]['html'];
-                        $('#pokedeck').html(pokedeck_html);
-                        $('html, body').animate({scrollTop: 0}, 600);
-                     });
-                 })
-             })
-
+                    $('#pokedeck').html(html_str)
+                });
+            })
          });
     </script>
     <style>

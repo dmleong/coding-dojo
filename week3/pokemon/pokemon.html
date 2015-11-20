@@ -5,26 +5,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            var container = [];
-            var sprites = []
             for (var i = 1; i <= 151; i++) {
-                var jqxhr = $.get('http://pokeapi.co/api/v1/pokemon/' + i, function(res) {
-                    var sprite = res['sprites'][0]['resource_uri'];
-                    sprites.push(sprite);
-                })
-            };
-
-            jqxhr.always(function(){
-                for (var j = 0; j < sprites.length-1; j++) {
-                    var images = $.get('http://pokeapi.co' + sprites[j], function(response) {
-                        container.push("<img src='http://pokeapi.co" + response["image"] + "'/>");
-                    })
-                }
-                images.always(function() {
-                    $('#pokemon').append(container);
-                })
-            })
-
+                $('#pokemon').append("<img src='http://pokeapi.co/media/img/" + i + ".png'/>");
+            }
 
         });
     </script>
