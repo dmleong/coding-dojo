@@ -26,6 +26,7 @@
                      $('#pokemon').append(container);
                      $('.pokemon').click(function(){
                         getPokemonInfo(this.id, this.src);
+                        $('html, body').animate({scrollTop: 0}, 600);
                      });
                  })
              })
@@ -58,6 +59,9 @@
          });
     </script>
     <style>
+        body{
+            font-family: sans-serif;
+        }
         #pokemon {
             width: 70%;
             float: left;
