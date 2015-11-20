@@ -7,10 +7,32 @@
          $(document).ready(function() {
              var container = [];
              var sprites = []
+             var info = []
+
              for (var i = 1; i <= 151; i++) {
                  var jqxhr = $.get('http://pokeapi.co/api/v1/pokemon/' + i, function(res) {
-                     var sprite = res['sprites'][0]['resource_uri'];
-                     sprites.push(sprite);
+                    var sprite = res['sprites'][0]['resource_uri'];
+                    sprites.push(sprite);
+
+                    var html_str = "";
+                    html_str += "<h4>Name: " + res['name'] + "</h4>";
+                    html_str += "<h4>Height:</h4>";
+                    html_str += res['height'];
+                    html_str += "<h4>Weight</h4>";
+                    html_str += res['weight'];
+                    html_str += "<h4>Types</h4>";
+                    html_str += "<ul>";
+                    for (var k = 0; k < res['types'].length; k++) {
+                        html_str += "<li>" + res['types'][k]['name'] + "</li>";
+                    }
+                    html_str += "</ul>";
+
+                    var poke_info = {
+                        "id": res['pkdx_id'],
+                        "html" : html_str
+                    }
+
+                    info.push(poke_info);
                  }, "json")
              };
 
@@ -25,33 +47,15 @@
                  images.always(function() {
                      $('#pokemon').append(container);
                      $('.pokemon').click(function(){
-                        getPokemonInfo(this.id, this.src);
+                        info[((this.id)-1)]['image'] = this.src;
+                        var pokedeck_html = '';
+                        pokedeck_html += "<img src='" + info[((this.id)-1)]['image'] + "'/>";
+                        pokedeck_html += info[(this.id)-1]['html'];
+                        $('#pokedeck').html(pokedeck_html);
                         $('html, body').animate({scrollTop: 0}, 600);
                      });
                  })
              })
-
-             function getPokemonInfo(id, src) {
-                $.get('http://pokeapi.co/api/v1/pokemon/' + id, function(res) {
-                    console.log(res['height'], res['weight'], res['name']);
-                    var html_str = "";
-                    html_str += "<img class='pokedeck-img' src='" + src + "'/>";
-                    html_str += "<h4>Name: " + res['name'] + "</h4>";
-                    html_str += "<h4>Height:</h4>";
-                    html_str += res['height'];
-                    html_str += "<h4>Weight</h4>";
-                    html_str += res['weight'];
-                    html_str += "<h4>Types</h4>";
-                    html_str += "<ul>";
-                    for (var k = 0; k < res['types'].length; k++) {
-                        html_str += "<li>" + res['types'][k]['name'] + "</li>";
-                    }
-                    html_str += "</ul>";
-
-                    $('#pokedeck').html(html_str);
-
-                }, "json")
-             }
 
 
 
