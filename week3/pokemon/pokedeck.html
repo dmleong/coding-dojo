@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title>Pokedeck</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+         $(document).ready(function() {
+             var container = [];
+             var sprites = []
+             for (var i = 1; i <= 151; i++) {
+                 var jqxhr = $.get('http://pokeapi.co/api/v1/pokemon/' + i, function(res) {
+                     var sprite = res['sprites'][0]['resource_uri'];
+                     sprites.push(sprite);
+                 }, "json")
+             };
+
+             jqxhr.always(function(){
+                 for (var j = 0; j < sprites.length-1; j++) {
+                    var images = $.get('http://pokeapi.co' + sprites[j], function(response) {
+                        var id = response['id'] - 1;
+                        var image = "<img class='pokemon' id='" + id + "' src='http://pokeapi.co" + response["image"] + "'/>";
+                        container.push(image);
+                     }, "json")
+                 }
+                 images.always(function() {
+                     $('#pokemon').append(container);
+                     $('.pokemon').click(function(){
+                        getPokemonInfo(this.id, this.src);
+                     });
+                 })
+             })
+
+             function getPokemonInfo(id, src) {
+                $.get('http://pokeapi.co/api/v1/pokemon/' + id, function(res) {
+                    console.log(res['height'], res['weight'], res['name']);
+                    var html_str = "";
+                    html_str += "<img class='pokedeck-img' src='" + src + "'/>";
+                    html_str += "<h4>Name: " + res['name'] + "</h4>";
+                    html_str += "<h4>Height:</h4>";
+                    html_str += res['height'];
+                    html_str += "<h4>Weight</h4>";
+                    html_str += res['weight'];
+                    html_str += "<h4>Types</h4>";
+                    html_str += "<ul>";
+                    for (var k = 0; k < res['types'].length; k++) {
+                        html_str += "<li>" + res['types'][k]['name'] + "</li>";
+                    }
+                    html_str += "</ul>";
+
+                    $('#pokedeck').html(html_str);
+
+                }, "json")
+             }
+
+
+
+
+         });
+    </script>
+    <style>
+        #pokemon {
+            width: 70%;
+            float: left;
+            min-height: 300px;
+            box-sizing: content-box;
+            margin-right: 1%;
+        }
+
+        #pokedeck {
+            width: 27%;
+            box-sizing: border-box;
+            border: 10px solid red;
+            float: left;
+            height: 500px;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class='row'>
+    <div id='pokemon'></div>
+    <div id='pokedeck'></div>
+</div>
+</body>
+</html>
