@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
          $(document).ready(function() {
-            for (var i = 1; i < 5; i++) {
+            for (var i = 1; i < 151; i++) {
                 $('#pokemon').append("<img id='" + i + "'class='pokemon' src='http://pokeapi.co/media/img/" + i + ".png'/>");
             }
 
@@ -27,8 +27,10 @@
                     html_str += "</ul>";
 
                     $('#pokedeck').html(html_str)
+                    $('html, body').animate({scrollTop: 0}, 600);
                 });
             })
+
          });
     </script>
     <style>
