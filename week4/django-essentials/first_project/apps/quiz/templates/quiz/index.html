@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>My first template in django</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'quiz/style.css' %}">
+</head>
+<body>
+    <h1>Hello World!</h1>
+    {% if questions %}
+    <ul>
+        {% for question in questions %}
+        <li>Question No. {{question.id}} = {{question.content}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
