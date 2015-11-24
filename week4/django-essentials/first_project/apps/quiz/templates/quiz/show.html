@@ -1,8 +1,15 @@
 <html>
-    <head>
-        <title> My First Template in Django </title>
-    </head>
-    <body>
-        <h1> Question # {{ id }} {{ question }} </h1>
-    </body>
-</html><br>
+  <head>
+    <title>My First Template in Django </title>
+  </head>
+  <body>
+    <h1>Question # {{ question.id }}</h1>
+    <h3>{{ question.question_text }}</h3>
+    <p>Choices</p>
+    <ul>
+      {% for choice in choices %}
+        <li>{{ choice.choice_text }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

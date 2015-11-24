@@ -1,0 +1,10 @@
+Interest.objects.all()
+User.objects.all()
+i = Interest.objects.create(name='coding', created_at=timezone.now())
+i1 = Interest.objects.get(id=1)
+u = User.objects.create(first_name='Danielle', last_name='Leong', age=28, created_at=timezone.now(), occupation='Web developer', interest=i1)
+User.objects.filter(first_name__startswith='J')
+User.objects.filter(age__gt=25)
+User.objects.filter(created_at__year=2015)
+u2 = User.objects.get(id=5)
+u2.age = 26

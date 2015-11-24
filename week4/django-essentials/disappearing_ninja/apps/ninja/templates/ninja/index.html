@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ninjas</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'ninja/css/style.css' %}">
+
+</head>
+<body>
+<h1>Disappearing Ninjas</h1>
+{% if view_all == True %}
+<img src="{% static 'ninja/img/donatello.jpg' %}">
+<img src="{% static 'ninja/img/leonardo.jpg' %}">
+<img src="{% static 'ninja/img/michelangelo.jpg' %}">
+<img src="{% static 'ninja/img/raphael.jpg' %}">
+{% endif %}
+{% if color == 'blue' %}
+<img src="{% static 'ninja/img/leonardo.jpg' %}">
+{% endif %}
+{% if color == 'red' %}
+<img src="{% static 'ninja/img/raphael.jpg' %}">
+{% endif %}
+{% if color == 'orange' %}
+<img src="{% static 'ninja/img/michelangelo.jpg' %}">
+{% endif %}
+{% if color == 'purple' %}
+<img src="{% static 'ninja/img/donatello.jpg' %}">
+{% endif %}
+{% if april == True %}
+<img src="{% static 'ninja/img/notapril.jpg' %}">
+{% endif %}
+
+</body>
+</html>
