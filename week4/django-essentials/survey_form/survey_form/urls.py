@@ -1,4 +1,4 @@
-"""model_practice URL Configuration
+"""survey_form URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from apps.surveys import views
 
 urlpatterns = [
-    url(r'^$', include('apps.home.urls')),
-    url(r'^interests/', include('apps.interests.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^process_form/$', views.process_form, name='process_form'),
+    url(r'^result/$', views.view_result, name='view_result'),
     url(r'^admin/', include(admin.site.urls)),
 ]

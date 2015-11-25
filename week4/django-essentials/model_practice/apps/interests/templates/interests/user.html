@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+    <title>Interests App</title>
+</head>
+<body>
+<h1>User #{{users.id}}</h1>
+<p>{{users.first_name}} {{users.last_name}}</p>
+<p>Occupation: {{users.occupation}}</p>
+<p>Interest: {{users.interest.name}}</p>
+<p>Age: {{users.age}}</p>
+<p><a href="{% url 'show_interests' %}">Back to Users and Interests</a></p>
+</body>
+</html>

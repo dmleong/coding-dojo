@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Interests</title>
+</head>
+<body>
+<h1>Welcome to the Interests App Landing</h1>
+<ol>
+{% for user in users %}
+<li>{{user.first_name}} {{user.last_name}}</li>
+<p>Interest: {{user.interest.name}}</p>
+{% endfor %}
+</ol>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <title>Random number</title>
+</head>
+<body>
+<h1>Random number counter</h1>
+<p>{{string}}</p>
+<p>Counter: {{counter}}</p>
+<form action="{% url 'increment' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" name="submit" value="New number"/>
+</form>
+<form action="{% url 'clear' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" name="submit" value="Clear" />
+</form>
+</body>
+</html>

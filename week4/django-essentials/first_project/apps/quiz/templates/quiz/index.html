@@ -6,7 +6,9 @@
     <h1>Hello World! Welcome to my Quiz App!</h1>
     <h3>Questions</h3>
     <ol>
+      {% for question in questions %}
         <li>{{ question.question_text }}</li>
+      {% endfor %}
     </ol>
   </body>
 </html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <title>Survey</title>
+</head>
+<body>
+<h1>Survey</h1>
+<form action="{% url 'process_form' %}" method='POST'>
+    {% csrf_token %}
+    <div>
+        <label for='name'>Name:<input type='text' name='name'/></label>
+    </div>
+    <div>
+        <label for='location'>Location:
+            <select name='location'>
+                {% for location in locations %}
+                    <option value='{{location}}'>{{location}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div>
+        <label for='language'>Language:
+            <select name='language'>
+                {% for language in languages %}
+                    <option value='{{language}}'>{{language}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div>
+        <label for='comment'>Comment:
+            <textarea name='comment' row='7'></textarea>
+        </label>
+    <div>
+        <input type='submit' name='submit'/>
+    </div>
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-"""model_practice URL Configuration
+"""random_string URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from apps.home import views
 
 urlpatterns = [
-    url(r'^$', include('apps.home.urls')),
-    url(r'^interests/', include('apps.interests.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^increment$', views.increment, name='increment'),
+    url(r'^clear$', views.clear, name='clear'),
     url(r'^admin/', include(admin.site.urls)),
 ]
