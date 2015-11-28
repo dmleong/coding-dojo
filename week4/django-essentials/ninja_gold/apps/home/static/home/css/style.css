@@ -1,0 +1,42 @@
+.col-md-3 {
+    border: 3px solid black;
+    text-align: center;
+    padding: 40px;
+    width: 24%;
+    margin: 0 1.25% 0 0;
+}
+
+.col-md-3:last-child {
+    margin-right: 0;
+}
+
+.activities {
+    border: 3px solid black;
+    height: 300px;
+    width: 100%;
+    overflow: scroll;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+li {
+    list-style: none;
+}
+
+.lost {
+    color: red;
+}
+
+.earn {
+    color: green;
+}

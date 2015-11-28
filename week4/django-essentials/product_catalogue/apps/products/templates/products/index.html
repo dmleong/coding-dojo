@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>Products</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- Latest compiled and minified CSS -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' integrity='sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==' crossorigin='anonymous'>
+    {% load staticfiles %}
+    <link rel='stylesheet' href="{% static 'products/css/style.css' %}" />
+
+</head>
+<body>
+    <div class='container'>
+        <h1>Products</h1>
+        <table class='table table-striped col-md-8'>
+            <thead>
+                <th>Id</th>
+                <th>Brand Name</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{product.id}}</td>
+                    <td>{{product.brand_name}}</td>
+                    <td>{{product.product_name}}</td>
+                    <td>${{product.price|floatformat:2}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.created_at}}</td>
+                    <td><a href="/products/edit/{{product.id}}">Edit</a> | <a href="/products/delete/{{product.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class='row'>
+            <form action="{% url 'create_product' %}" method="POST" class='col-md-4'>
+                {% csrf_token %}
+                {% for input in form %}
+                <div class='form-group'>
+                    {{input.errors}}
+                    {{ input.non_field_errors }}
+                    <label>{{input.label}}</label>
+                    {{input}}
+                </div>
+                {% endfor %}
+                <input type='submit' name='submit' value='Add product'/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
