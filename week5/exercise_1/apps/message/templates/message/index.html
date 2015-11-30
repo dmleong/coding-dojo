@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+    <title>Exercise 1</title>
+</head>
+<body>
+    <h1>Message form</h1>
+<form action="/" method="POST">
+    {% csrf_token %}
+    <textarea name='message'></textarea><br/>
+    <input type='submit' name='submit' value="Submit"/>
+</body>
+</html>
