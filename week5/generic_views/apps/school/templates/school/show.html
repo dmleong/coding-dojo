@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Generic views</title>
+</head>
+<body>
+{% if student_info %}
+    <h1>Student</h1>
+    <p>{{ student_info.student.first_name }} {{ student_info.student.last_name }}</p>
+    {% if course_list %}
+    <ul>
+        {% for course in course_list %}
+            <li><a href="{% url 'subject-detail' course.id %}">{{course.title}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endif %}
+
+{% if teacher_info %}
+    <h1>Teacher</h1>
+    <p>{{ teacher_info.teacher.first_name }} {{ teacher_info.teacher.last_name }}</p>
+    {% if course_list %}
+    <ul>
+        {% for course in course_list %}
+            <li><a href="{% url 'subject-detail' course.id %}">{{course.title}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endif %}
+
+
+{% if subject %}
+    <p>Course name: {{subject.title}}</p>
+    <p>Teacher: <a href="{% url 'teacher-detail' subject.teacher.id %}">{{subject.teacher.first_name}} {{subject.teacher.last_name}}</a></p>
+    <p>Students: </p>
+    {% if subject.student %}
+    <ul>
+        {% for student in subject.student.all %}
+        <li><a href="{% url 'student-detail' student.id %}">{{student.first_name}} {{student.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endif %}
+</body>
+</html>

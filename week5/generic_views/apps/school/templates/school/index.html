@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>Class based views</title>
+</head>
+<body>
+<h1>School</h1>
+{% for subject in subjects %}
+<p><a href="{% url 'subject-detail' subject.id %}">{{subject.title}}</a></p>
+{% endfor %}
+
+{% for teacher in teacher_list %}
+<p><a href="{% url 'teacher-detail' teacher.id %}">{{teacher.first_name}} {{teacher.last_name}}</a></p>
+{% endfor %}
+
+{% for student in student_list %}
+<p><a href="{% url 'student-detail' student.id %}">{{student.first_name}} {{student.last_name}}</a></p>
+{% endfor %}
+
+<p><a href="{% url 'teacher-list' %}">See all teachers</a> <a href="{% url 'student-list'%}">See all students</a> <a href="{% url 'subjects' %}">See all subjects</a></p>
+
+
+</body>
+</html>
